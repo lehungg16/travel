@@ -1,0 +1,243 @@
+<?php
+include "../config.php";
+
+// THÊM USER
+if(isset($_POST['add'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql = "INSERT INTO tb_accounts(username, password) VALUES('$username','$password')";
+    mysqli_query($conn, $sql);
+}
+
+// XÓA USER
+if(isset($_GET['delete'])){
+    $id = $_GET['delete'];
+    mysqli_query($conn, "DELETE FROM tb_accounts WHERE id=$id");
+}
+
+// SỬA USER
+if(isset($_POST['update'])){
+    $id = $_POST['id'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    mysqli_query($conn, "UPDATE tb_accounts SET username='$username', password='$password' WHERE id=$id");
+}
+
+// LẤY DANH SÁCH
+$result = mysqli_query($conn, "
+    SELECT u.*, 
+    (SELECT COUNT(*) FROM tb_bookings b WHERE b.user_id = u.id) as total_booking
+    FROM tb_accounts u
+");
+?>
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý tài khoản</title>
+    <link rel="stylesheet" href="../css/users.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Quản lý tài khoản</h2>
+
+    <!-- FORM THÊM -->
+    <form method="post" class="form-add">
+        <input type="text" name="username" placeholder="Tên đăng nhập" required>
+        <input type="text" name="password" placeholder="Mật khẩu" required>
+        <button name="add">Thêm</button>
+    </form>
+
+    <!-- TABLE -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tài khoản</th>
+            <th>Mật khẩu</th>
+            <th>Đặt tour</th>
+            <th>Hành động</th>
+        </tr>
+
+        <?php while($row = mysqli_fetch_assoc($result)) { ?>
+        <tr>
+            <form method="post">
+                <td><?= $row['id'] ?></td>
+
+                <td>
+                    <input type="text" name="username" value="<?= $row['username'] ?>">
+                </td>
+
+                <td>
+                    <input type="text" name="password" value="<?= $row['password'] ?>">
+                </td>
+
+                <td><?= $row['total_booking'] ?></td>
+
+                <td>
+                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                    <button name="update">Sửa</button>
+                    <a href="?delete=<?= $row['id'] ?>" onclick="return confirmDelete()">Xóa</a>
+                </td>
+            </form>
+        </tr>
+        <?php } ?>
+
+    </table>
+</div>
+
+<script src="../js/users.js"></script>
+</body>
+</html> css là body {
+    font-family: Arial;
+    background: #f5f6fa;
+}
+
+.container {
+    width: 800px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-add {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-add input {
+    padding: 8px;
+    flex: 1;
+}
+
+.form-add button {
+    padding: 8px 15px;
+    background: green;
+    color: white;
+    border: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+table input {
+    width: 90%;
+    padding: 5px;
+}
+
+button {
+    background: orange;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+a {
+    color: red;
+    margin-left: 10px;
+    text-decoration: none;
+} và js function confirmDelete(){
+    return confirm("Bạn có chắc muốn xóa không?");
+} ====== board.php ===<?php
+include "../config.php";
+
+if($_SESSION['role']!="1"){
+die("Không có quyền");
+}
+?>
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Admin</title>
+    <link rel="stylesheet" href="../css/board.css">
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Trang Admin</h2>
+
+    <div class="menu">
+    <a href="dashboard.php">📊 Thống kê</a>
+    <a href="users.php">👤 Quản lý user</a>
+    <a href="list_tour.php">🧳 Danh sách tour</a>
+    <a href="add_tour.php">➕ Thêm tour</a>
+    <a href="booktour.php">📦 Đơn đặt tour</a>
+    <a href="chat_admin.php">💬 Tin nhắn</a>
+    <a href="../logout.php">🚪 Đăng xuất</a>
+</div>
+</div>
+
+</body>
+</html> css /* Chủ đề du lịch biển */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #87CEFA, #E0F7FA);
+    color: #033;
+}
+
+/* Tiêu đề */
+h2 {
+    text-align: center;
+    padding: 15px;
+    background: #00a8cc;
+    color: white;
+    border-bottom: 4px solid #007ea7;
+}
+
+/* Link menu */
+a {
+    display: block;
+    width: 220px;
+    margin: 10px auto;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    background: #00bcd4;
+    color: white;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+a:hover {
+    background: #0097a7;
+    transform: scale(1.05);
+}
+
+/* Trang admin box */
+.container {
+    margin-top: 30px;
+}
+
+/* thêm hiệu ứng biển */
+body::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: url("https://i.imgur.com/3ZQ3Z8L.png") repeat-x;
+    opacity: 0.4;
+}
