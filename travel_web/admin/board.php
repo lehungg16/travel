@@ -11,14 +11,14 @@ die("Không có quyền");
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Trang Admin</title>
+    <title >Trang Admin</title>
     <link rel="stylesheet" href="../css/board.css">
 </head>
 
 <body>
 
 <div class="container">
-    <h2>Trang Admin</h2>
+    <a href="../index.php"<h2>Trang Admin</h2></a>
 
     <div class="menu">
     <a href="dashboard.php">📊 Thống kê</a>

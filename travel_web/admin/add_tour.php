@@ -33,7 +33,7 @@ VALUES('$name','$des','$price','$image','$date')";
 <body>
 
 <div class="container">
-    <h2>Thêm tour</h2>
+    <a href="../admin/board.php"><h2>Thêm tour</h2></a>
 
     <form method="post" enctype="multipart/form-data" class="form-tour">
 

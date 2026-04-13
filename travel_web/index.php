@@ -1,4 +1,4 @@
-<?php include "config.php"; 
+<?php session_start(); 
 ?>
 	<link rel="stylesheet" href="css/style.css">
 
@@ -8,6 +8,7 @@
 <?php
 //Kiểm tra tài khoản admin | user
 if(isset($_SESSION['user'])){
+	echo '<a href="user/dashboard.php">User</a>';
 	echo '<a href="user/tours.php">Tour</a>';
 	echo '<a href="logout.php">Logout</a>';
 

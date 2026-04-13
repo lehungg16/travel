@@ -1,8 +1,6 @@
 <?php
-$conn = mysqli_connect("localhost","root","","travel_web");
-
-if(!$conn){
-    die("Kết nối thất bại");
-}
+// Kết nối dữ liệu phpMyAdmin (database)
+$conn = mysqli_connect("localhost","root","","travel_web") or die("Kết nối thất bại");
+//Gọi session
 session_start();
 ?>

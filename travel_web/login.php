@@ -39,6 +39,7 @@ echo "Sai tài khoản";
 <div class="login-container">
 
     <form method="post" class="login-form">
+        <a href="index.php" class="close-btn">✖</a>
         <h2>🌍 Đăng nhập</h2>
 
         <input type="text" name="username" placeholder="Tên đăng nhập" required>
