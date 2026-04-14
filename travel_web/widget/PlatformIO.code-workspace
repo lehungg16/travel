@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "D:/hw/PlatformIO"
+		},
+		{
+			"name": "ESP32 S3",
+			"path": "D:/hw/PlatformIO/Projects/ESP32 S3"
+		}
+	],
+	"settings": {}
+}

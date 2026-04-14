@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h2>Thêm tài khoản</h2>
+<a href ="../admin/users.php"><h2>Thêm tài khoản</h2></a>
 
 <form method="post">
     <input type="text" name="username" placeholder="Tên đăng nhập"><br><br>

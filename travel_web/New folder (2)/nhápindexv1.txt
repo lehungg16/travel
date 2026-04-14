@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Gia Lai</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f7f9;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+    background:linear-gradient(90deg,#0a9396,#2a9d8f);
+    color:white;
+}
+
+nav a{
+    margin:0 15px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.lang-btn{
+    cursor:pointer;
+    background:white;
+    color:#0a9396;
+    padding:5px 10px;
+    border-radius:5px;
+}
+
+/* HERO */
+.hero{
+    height:90vh;
+    background:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470") center/cover fixed;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
+
+.hero h1{
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.hero button{
+    padding:12px 25px;
+    border:none;
+    background:#0a9396;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+/* SECTION */
+.section{
+    padding:60px 40px;
+    text-align:center;
+}
+
+.section h2{
+    margin-bottom:20px;
+    color:#0a9396;
+}
+
+/* TOUR */
+.tours{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card .content{
+    padding:15px;
+}
+
+.card button{
+    margin-top:10px;
+    padding:10px;
+    background:#2a9d8f;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+/* GALLERY */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:10px;
+}
+
+.gallery img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* FOOTER */
+footer{
+    background:#0a9396;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+/* ANIMATION */
+.fade{
+    opacity:0;
+    transform:translateY(30px);
+    transition:1s;
+}
+
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .hero h1{
+        font-size:30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>Travel Gia Lai</h2>
+    <nav>
+        <a href="#" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
+        <a href="#" data-vi="Tour" data-en="Tours">Tour</a>
+        <a href="#" data-vi="Giới thiệu" data-en="About">Giới thiệu</a>
+        <a href="#" data-vi="Liên hệ" data-en="Contact">Liên hệ</a>
+    </nav>
+    <div class="lang-btn" onclick="toggleLang()">VI / EN</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h1 id="heroTitle">Khám phá Gia Lai xanh mát</h1>
+        <button id="heroBtn">Khám phá ngay</button>
+    </div>
+</section>
+
+<!-- TOUR -->
+<section class="section fade">
+    <h2 data-vi="Tour nổi bật" data-en="Featured Tours">Tour nổi bật</h2>
+    <div class="tours">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+            <div class="content">
+                <h3>Biển Hồ Pleiku</h3>
+                <p>500.000 VNĐ</p>
+                <button data-vi="Đặt tour" data-en="Book now">Đặt tour</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
+            <div class="content">
+                <h3>Thác Phú Cường</h3>
+                <p>600.000 VNĐ</p>
+                <button data-vi="Đặt tour" data-en="Book now">Đặt tour</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+            <div class="content">
+                <h3>Chư Đăng Ya</h3>
+                <p>700.000 VNĐ</p>
+                <button data-vi="Đặt tour" data-en="Book now">Đặt tour</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section fade">
+    <h2 data-vi="Giới thiệu" data-en="About">Giới thiệu</h2>
+    <p data-vi="Gia Lai nổi tiếng với thiên nhiên hoang sơ, núi rừng và văn hóa đặc sắc."
+       data-en="Gia Lai is famous for its wild nature, mountains, forests, and unique culture.">
+       Gia Lai nổi tiếng...
+    </p>
+</section>
+
+<!-- GALLERY -->
+<section class="section fade">
+    <h2>Gallery</h2>
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Travel Gia Lai</p>
+</footer>
+
+<script>
+// LANGUAGE
+let isVI = true;
+
+function toggleLang(){
+    isVI = !isVI;
+
+    document.querySelectorAll("[data-vi]").forEach(el=>{
+        el.innerText = isVI ? el.dataset.vi : el.dataset.en;
+    });
+
+    document.getElementById("heroTitle").innerText = isVI 
+        ? "Khám phá Gia Lai xanh mát"
+        : "Explore Green Gia Lai";
+
+    document.getElementById("heroBtn").innerText = isVI 
+        ? "Khám phá ngay"
+        : "Explore now";
+}
+
+// SCROLL ANIMATION
+let fades = document.querySelectorAll(".fade");
+
+window.addEventListener("scroll", ()=>{
+    fades.forEach(el=>{
+        let top = el.getBoundingClientRect().top;
+        if(top < window.innerHeight - 50){
+            el.classList.add("show");
+        }
+    });
+});
+</script>
+
+</body>
+</html>

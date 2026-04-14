@@ -44,7 +44,7 @@ $result = mysqli_query($conn, "
 
 <div class="container">
     <h2 class="title">Quản lý tài khoản</h2>
-
+    <a href="../admin/board.php">CCCCCCCC<a>
 <div class="top-bar">
     <input type="text" placeholder="Tìm tên đăng nhập..." class="search">
 
