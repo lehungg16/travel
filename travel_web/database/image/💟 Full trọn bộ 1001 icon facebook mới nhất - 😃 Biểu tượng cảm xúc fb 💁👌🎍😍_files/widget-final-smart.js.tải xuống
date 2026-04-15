@@ -1,0 +1,244 @@
+(function () {
+  const css = `
+.myprod-widget { padding: 16px 0; position: relative; opacity: 1; transition: opacity 0.3s ease; }
+.myprod-carousel { display: flex; overflow-x: auto; gap: 12px; scroll-snap-type: x mandatory; width: 100%;justify-content: center; padding: 12px 0;}
+.myprod-carousel::-webkit-scrollbar { display: none; }
+.myprod-item { scroll-snap-align: start; background: white; flex: 0 0 240px; max-width:240px; min-width:150px; border-radius: 12px; padding: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.1); text-decoration: none; color: inherit; display: flex; flex-direction: column; margin: 0;}
+.myprod-item img { width: 100%; border-radius: 8px; object-fit: cover; }
+.myprod-name { font-weight: bold; font-size: 15px; margin: 6px 0; line-height: 1.3; max-height: 2.4em; display: -webkit-box; -webkit-line-clamp: 2;  -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
+.myprod-price-row { display: flex; justify-content: flex-start; font-size: 14px; align-items: center; gap: 4px;}
+.myprod-discounted { font-size: 20px; color: #e53935; font-weight: bold; }
+.myprod-price { text-decoration: line-through; color: #888; }
+.myprod-discount-label { position: absolute; top: 6px; left: 6px; font-size: 11px; background: #e53935; color: white; padding: 2px 6px; border-radius: 4px; }
+
+.myprod-countdown { font-size: 12px; color: #e53935; margin-top: 4px; }
+.myprod-countdown.top-item { position: absolute;top: -15px;  right: -12px; background: #ee4d2d; padding: 8px 8px; border-radius: 0px 12px 0 12px; color:#ffffff; font-size: 14px; font-weight: 700;}
+.myprod-countdown-time { font-family: monospace; background: black; color: white; padding: 2px 4px; border-radius: 4px; margin-left: 4px; }
+.myprod-prevnext { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.4); color: white; font-size: 20px; padding: 6px 10px; cursor: pointer; }
+.myprod-prev { left: 0; border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+.myprod-next { right: 0; border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+@media (max-width: 600px){
+.myprod-widget {padding: 16px 0 16px 12px !important;}
+.myprod-carousel{justify-content: flex-start;}
+.myprod-item{min-width:280px}
+ }
+`;
+  const style = document.createElement("style");
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  const widgetState = {};
+
+  function getDiscountPercent(price, discountPrice) {
+    return Math.round(100 - (discountPrice / price) * 100);
+  }
+
+  function renderGroup(container, options) {
+    const state = widgetState[container.id];
+    const selected = state.groups[state.currentGroup] || [];
+
+    const carousel = container.querySelector('.myprod-carousel');
+    if (!carousel) return;
+    carousel.innerHTML = '';
+    selected.forEach(p => {
+      const item = document.createElement("a");
+      item.href = p.link;
+      item.target = "_blank";
+      item.className = "myprod-item";
+      item.rel = "noopener nofollow ugc";
+
+      if (options.brand === "zalopay") {
+        item.style.background = "#E6F7FF";
+        item.style.border = "1px solid #00CF6A";
+      } else if (options.brand === "shopee") {
+        item.style.background = "#FFF5EB";
+        item.style.border = "1px solid #ee4d2d";
+      } else if (options.brand === "momo") {
+        item.style.background = "#FFE8F6";
+        item.style.border = "1px solidrgb(238, 9, 123)";
+      }
+      // Theme 2: List layout
+      if (options.style === "1") {
+        item.innerHTML = `
+          <div style="display:flex; gap:10px; position: relative;">
+          <div class="myprod-discount-label">-${getDiscountPercent(p.price, p.discountPrice)}%</div>
+            <img src="${p.image}" alt="${p.name}" style="width:100px; height:100px; border-radius:8px; object-fit:cover;" />
+            <div style="flex:1">
+              <div class="myprod-name">${p.name}</div>
+              <div class="myprod-price-row">
+                <span class="myprod-discounted">${p.discountPrice.toLocaleString()}đ</span>
+                <span class="myprod-price">${p.price.toLocaleString()}đ</span>
+              </div>
+              <div class="myprod-countdown" data-endtime="${p.endTime}">
+                ⏰ <span class="myprod-countdown-time">--:--:--</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      // Theme 2: List layout
+      else if (options.style === "2") {
+        item.innerHTML = `  
+        <div style="position: relative;">      
+          <img src="${p.image}" alt="${p.name}" / style="margin-bottom: 12px;">          
+            <div class="myprod-name">${p.name}</div>
+            <div class="price-row">
+              <span class="myprod-discounted">${p.discountPrice.toLocaleString()}đ</span>
+              <span class="myprod-price">${p.price.toLocaleString()}đ</span>
+            </div>             
+           <div class="myprod-discount-label">-${getDiscountPercent(p.price, p.discountPrice)}%</div>
+             <div class="myprod-countdown  top-item" data-endtime="${p.endTime}">
+            ⏰ Còn <span class="myprod-countdown-time">--:--:--</span>          
+          </div>
+
+         </div>
+        `;
+      }
+      // Default layout
+      else {
+        item.innerHTML = `
+         <div style="display:flex; gap:10px; position: relative;">
+          <div class="myprod-discount-label">-${getDiscountPercent(p.price, p.discountPrice)}%</div>
+          <img src="${p.image}" alt="${p.name}" />
+          <div class="myprod-name">${p.name}</div>
+          <div class="myprod-price-row">
+            <span class="myprod-discounted">${p.discountPrice.toLocaleString()}đ</span>
+            <span class="myprod-price">${p.price.toLocaleString()}đ</span>
+          </div>
+          <div class="myprod-countdown" data-endtime="${p.endTime}">
+            ⏰ Còn <span class="myprod-countdown-time">--:--:--</span>
+          </div>
+          </div>
+        `;
+      }
+
+      carousel.appendChild(item);
+    });
+
+    updateCountdowns();
+  }
+
+  function updateCountdowns() {
+    const countdowns = document.querySelectorAll(".myprod-countdown");
+    countdowns.forEach(cd => {
+      const endTime = new Date(cd.getAttribute("data-endtime")).getTime();
+      const now = Date.now();
+      const diff = endTime - now;
+      if (diff <= 0) {
+        cd.style.display = "none";
+      } else {
+        const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+        const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+        const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        cd.querySelector(".myprod-countdown-time").textContent = `${h}:${m}:${s}`;
+      }
+    });
+  }
+
+  const containers = Array.from(document.querySelectorAll('[id^="my-product-section"]'));
+  containers.forEach(container => {
+    const id = container.id.toLowerCase();
+
+    const isMobile = window.innerWidth <= 600;
+    const auto = id.match(/count-auto-pc-(\d+)-(\d+)-mb-(\d+)-(\d+)/);
+    const countPc = id.match(/count-pc-(\d+)-(\d+)/);
+    const countMb = id.match(/count-mb-(\d+)-(\d+)/);
+    let show = 3, total = 6;
+
+    if (auto) {
+      if (isMobile) {
+        show = parseInt(auto[3]);
+        total = parseInt(auto[4]);
+      } else {
+        show = parseInt(auto[1]);
+        total = parseInt(auto[2]);
+      }
+    } else if (!isMobile && countPc) {
+      show = parseInt(countPc[1]);
+      total = parseInt(countPc[2]);
+    } else if (isMobile && countMb) {
+      show = parseInt(countMb[1]);
+      total = parseInt(countMb[2]);
+    }
+
+    const matchCount = id.match(/count-(\d+)-(\d+)/);
+    const matchStyle = id.match(/style[-_](\d+)/);
+    const matchBrand = id.match(/brand[-_](\w+)/);
+    const matchAutoLoop = id.match(/auto-loop(?:-(\d+))?/);
+
+    const options = {
+      show,
+      total,
+      style: matchStyle ? matchStyle[1] : "1",
+      brand: matchBrand ? matchBrand[1] : null,
+      autoLoop: !!matchAutoLoop,
+      autoLoopDelay: matchAutoLoop && matchAutoLoop[1] ? parseInt(matchAutoLoop[1]) * 1000 : 16000,
+      prevNext: id.includes("prevnext")
+    };
+
+    container.classList.add("myprod-widget");
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const shuffled = [...products].sort(() => 0.5 - Math.random());
+          const groups = [];
+          if (options.show <= 0 || options.total <= 0) {
+            console.warn("⚠️ Widget không hiển thị vì show/total không hợp lệ:", container.id);
+            return;
+          }
+          for (let i = 0; i < options.total; i += options.show) {
+            groups.push(shuffled.slice(i, i + options.show));
+          }
+
+          widgetState[container.id] = {
+            currentGroup: 0,
+            groups
+          };
+
+          const carousel = document.createElement("div");
+          carousel.className = "myprod-carousel";
+          container.innerHTML = '';
+          container.appendChild(carousel);
+
+          renderGroup(container, options);
+
+          if (options.autoLoop) {
+            setInterval(() => {
+              widgetState[container.id].currentGroup = (widgetState[container.id].currentGroup + 1) % widgetState[container.id].groups.length;
+              renderGroup(container, options);
+            }, options.autoLoopDelay);
+          }
+
+          if (options.prevNext) {
+            const prevBtn = document.createElement("div");
+            const nextBtn = document.createElement("div");
+            prevBtn.innerHTML = "←";
+            nextBtn.innerHTML = "→";
+            prevBtn.className = "myprod-prevnext myprod-prev";
+            nextBtn.className = "myprod-prevnext myprod-next";
+            container.appendChild(prevBtn);
+            container.appendChild(nextBtn);
+
+            prevBtn.onclick = () => {
+              const state = widgetState[container.id];
+              state.currentGroup = (state.currentGroup - 1 + state.groups.length) % state.groups.length;
+              renderGroup(container, options);
+            };
+            nextBtn.onclick = () => {
+              const state = widgetState[container.id];
+              state.currentGroup = (state.currentGroup + 1) % state.groups.length;
+              renderGroup(container, options);
+            };
+          }
+
+          obs.unobserve(container);
+        }
+      });
+    }, { rootMargin: "200px" });
+
+    observer.observe(container);
+  });
+
+  setInterval(updateCountdowns, 1000);
+})();

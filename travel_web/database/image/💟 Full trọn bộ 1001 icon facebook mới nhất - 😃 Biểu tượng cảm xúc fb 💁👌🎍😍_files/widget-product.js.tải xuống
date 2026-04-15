@@ -1,0 +1,158 @@
+ // ============ DATA ================
+  const products = [
+  {
+      name: "Thùng 30 gói giấy ăn rút Topgia 3 màu cao cấp 4 lớp dày dặn, mềm mịn",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mbq4f9j99olxb6.webp",
+      price:  1100000,
+      discountPrice: 85001,
+      link: "https://s.shopee.vn/30dIo3cFbO",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Son Kem 3CE Cho Viền Môi Mờ Ảo Không Lem Blur Water Tint 4.6g",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134201-7ras8-mclys3kpbonw7d@resize_w450_nl.webp",
+      price:  371127,
+      discountPrice: 254150,
+      link: "https://s.shopee.vn/2LL1Xg9CWW",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Nước Tẩy Trang làm sạch sâu dịu nhẹ cho mọi loại da (dầu, thường, khô, nhạy cảm) -Garnier Micellar Cleansing Water 400ml",
+      image: "https://down-vn.img.susercontent.com/file/sg-11134201-7rdxb-mcmhd3tmxz4036@resize_w450_nl.webp",
+      price:  195381,
+      discountPrice: 130900,
+      link: "https://s.shopee.vn/50ONCJKUiR",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Nước tẩy trang giúp làm sạch sâu, loại bỏ bụi bẩn và lớp trang điểm 3-in-1 L'Oreal Paris Micellar Water 400ml",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134201-7ras8-mcfs8inwjosl10@resize_w450_nl.webp",
+      price:  234655,
+      discountPrice: 143650,
+      link: "https://s.shopee.vn/2B4BpBG3tI",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Bảo hành chính thức Quạt mini Goojodoq có màn hình kỹ thuật số LED",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m5cgmpq9q62e18@resize_w450_nl.webp",
+      price:  288000,
+      discountPrice: 152150,
+      link: "https://s.shopee.vn/BJ7RejGmf",
+      endTime: "2025-07-26T23:59:59"
+    },
+    
+    {
+      name: "Áo Polo thể thao nam ProMax S1 Logo Coolmate",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134201-7ra0g-m6iknh76b7a9cc@resize_w450_nl.webp",
+      price:  239000,
+      discountPrice: 152150,
+      link: "https://s.shopee.vn/2Vh2E3v8gK",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Bàn Chải Điện P/S S100 PRO - Công Nghệ Sóng Âm, Chải Sạch Mảng Bám Tới 10X",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mbn8yi5zpkdc20@resize_w450_nl.webp",
+      price:  1300000,
+      discountPrice: 905000,
+      link: "https://s.shopee.vn/BJ7RuR7UR",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Áo polo nam cao cấp BASIC CLASSIC vải cá sấu cotton interlock, thanh lịch, sang trọng - POLOMANOR",
+      image: "https://down-ws-vn.img.susercontent.com/vn-11134201-7ras8-mcfyjtgmbqdh69.webp",
+      price:  500000,
+      discountPrice: 274040,
+      link: "https://s.shopee.vn/6AaKa5BniW",
+      endTime: "2025-06-26T23:59:59"
+    },
+      {
+      name: "Nước giặt OMO Matic 4.1kg (Túi)g",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mbyolelzogve36@resize_w450_nl.webp",
+      price:  258000,
+      discountPrice: 194650,
+      link: "https://s.shopee.vn/9pTcxsBWj4",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Bộ gội xả dưỡng tóc suôn mượt cao cấp L'Oreal Paris Extraordinary Oil Smooth 440ml x2",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134201-7ras8-mcfs8hjy67ab48.webp",
+      price:  508582,
+      discountPrice: 349000,
+      link: "https://s.shopee.vn/AUjJl0RdWU",
+      endTime: "2025-07-25T23:59:59"
+    },
+    {
+      name: "Thực phẩm bảo vệ sức khỏe DHC ZinC (20 ngày & 60 ngày) - Dạng viên uống hỗ trợ bổ sung kẽm",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m9joo6wp920y3e.webp",
+      price:  220000,
+      discountPrice: 77000,
+      link: "https://s.shopee.vn/2LNc2BBFya",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Áo Len Nam Nữ Cổ Lọ Quảng Châu 350gsm Lông Cừu Dài Tay Dày Dặn Mềm Mịn Cực Ấm Hàn Quốc Nhiều Màu DYACI AL83",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lpg62kjcq15n6b@resize_w450_nl.webp",
+      price:  150000,
+      discountPrice: 99000,
+      link: "https://s.shopee.vn/5VKdmxfkbj",
+      endTime: "2025-07-26T23:59:59"
+    },
+   {
+      name: "Khăn Tắm, Gội, Lau Mặt Châu Âu LOTUS 100% Cotton Mềm Mịn Thấm Hút Dùng Cho Gia Đình Spa Khách Sạn",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m8dpj4x43b7r82.webp",
+      price:  19000,
+      discountPrice: 9000,
+      link: "https://s.shopee.vn/7ASrngbaef",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Áo mưa đi xe máy PTLUXURY 1 người và 2 người che phủ toàn thân, kèm kính chắn mưa tiện lợi [ Hàng Tốt ]",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134201-7qukw-ljra9kja2via9d@resize_w450_nl.webp",
+      price:  200000,
+      discountPrice: 68000,
+      link: "https://s.shopee.vn/9zn3AzPxfh",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Smoothie Tẩy Tế Bào Chết Body Dove Chăm Da Sáng Mịn 298g",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mbpx5rdfprdha8@resize_w450_nl.webp",
+      price:  199000,
+      discountPrice: 137088,
+      link: "https://s.shopee.vn/zhGOKofl",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "GOOJODOQ 2025 Quạt tốc độ cao để bàn 2 trong 1 mới Quạt gió 100 tốc độ Màn hình kỹ thuật số LED quạt turbo có thể điều chỉnh Đèn chiếu",
+      image: "https://down-zl-vn.img.susercontent.com/vn-11134207-7ra0g-m8igxa7um7wi1f.webp",
+      price:  600000,
+      discountPrice: 249560,
+      link: "https://s.shopee.vn/6KtknzXSWf",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Chuột Rửa Mặt Chella 4 Trong 1 kiêm Tẩy Trang, Đẩy Tinh Chất, Rửa Mặt, Nâng Cơ - Bảo hành 1 NĂM CHELLA.MAKEUP",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mckxdmtxbaul86@resize_w450_nl.webp",
+      price:  1800000,
+      discountPrice: 1014000,
+      link: "https://s.shopee.vn/9pTcyKu6ev",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "[[NEW DEW] Son Tint Bóng Hàn Quốc Bền Màu, Lâu Trôi Cho Đôi Môi Căng Mọng, Ẩm Mịn Merzy The Watery Dew Tint 4g",
+      image: "https://down-zl-vn.img.susercontent.com/vn-11134207-7ra0g-m78y9l1m5m1kde.webp",
+      price:  249000,
+      discountPrice: 139000,
+      link: "https://s.shopee.vn/4fiqzaTugz",
+      endTime: "2025-07-26T23:59:59"
+    },
+    {
+      name: "Kem Nền Mịn Nhẹ Kiềm Dầu 16H Fit Me Maybelline Matte + Poreless Liquid Foundation Dành Cho Da Dầu và Da Thường 30ml",
+      image: "https://down-vn.img.susercontent.com/file/vn-11134201-7ras8-mckpm320fjfm0d@resize_w450_nl.webp",
+      price:  282763,
+      discountPrice: 186150,
+      link: "https://s.shopee.vn/7pfslE8HGW",
+      endTime: "2025-07-26T23:59:59"
+    }
+    // Thêm sản phẩm nếu cần
+  ];
+

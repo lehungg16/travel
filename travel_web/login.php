@@ -1,5 +1,4 @@
-<?php include "config.php"; ?>
-
+<?php include "config.php" ?>
 <?php
 
 if(isset($_POST['login'])){
@@ -34,6 +33,7 @@ echo "Sai tài khoản";
     <title>Đăng nhập - Travel</title>
     <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
 
 <div class="login-container">

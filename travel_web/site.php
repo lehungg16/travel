@@ -1,9 +1,12 @@
 <?php
-	function load_home()
+	function load_header()
 	{
-		require('widget/tours.php');
+		require('widget/header.php');
 	}
 	
-
+	function load_footer()
+	{
+		require('widget/footer.php');
+	}
 	
 ?>

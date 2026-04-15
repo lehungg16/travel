@@ -1,4 +1,4 @@
-<?php include "../config.php"; ?>
+<?php include "config.php"; ?>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -7,7 +7,7 @@
     <title>Danh sách tour</title>
 
     <!-- link CSS -->
-    <link rel="stylesheet" href="../css/tour.css">
+    <link rel="stylesheet" href="css/tour.css">
 </head>
 
 <body>
@@ -17,8 +17,8 @@
 <div id="overlay" onclick="closeMenu()"></div>
 
 <div id="sidebar">
-    <a href="../index.php">Trang chủ</a>
-    <a href="../index.php">Liên hệ</a>
+    <a href="index.php">Trang chủ</a>
+    <a href="index.php">Liên hệ</a>
 </div>
 
 <h2>Danh sách tour</h2>
