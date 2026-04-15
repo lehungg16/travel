@@ -1,1 +1,3 @@
-ver 3.1
+ver 4
+sql chuẩn // đã kết nối mối quan hệ
+
